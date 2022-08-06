@@ -1,0 +1,13 @@
+---
+- name: install Apache Web-Server
+  hosts: all
+  tasks:
+  - name: Install Apache on CentOS  Server
+    yum: name=httpd  state=latest
+    become: yes
+    when: ansible_os_family == "CentOS"
+
+  - name: Install Apache on Ubuntu Server
+    apt: name=apache2 state=latest
+    become: yes
+    when: ansible_os_family == "Ubuntu"

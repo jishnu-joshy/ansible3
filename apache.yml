@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  tasks:
+  - debug:
+      msg: " {{ ansible_distribution }}"
+ 
+  - name: Install nginx  packages
+    yum:
+      name: ["nginx", "mysql-server"]
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "CentOS" 
+
+  - name: install nginx and mysql packages for ubuntu
+    apt: 
+     name: ["nginx", "mysql-server"]
+     state: latest
+     update_cache: yes
+    when: ansible_distribution == "Ubuntu"
